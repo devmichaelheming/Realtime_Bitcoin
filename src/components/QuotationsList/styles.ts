@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
        color: '#ffffff',
        fontWeight: 'bold',
        fontSize: 14,
+   },
+   flatlist: {
+       width: '100%',
    }
 })
 

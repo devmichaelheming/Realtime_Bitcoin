@@ -36,7 +36,8 @@ async function getListCoins(url: string) {
     }
   });
   let data = queryCoinsList.reverse();
-  console.log(data);
+  console.log(data)
+  return data;
 }
 
 async function getPriceCoinsGraphic(url: string) {
@@ -48,16 +49,16 @@ async function getPriceCoinsGraphic(url: string) {
     return selectListQuotationsG[key]
   });
   let dataG = queryCoinsListG;
-  console.log(dataG);
+  return dataG;
 }
 
 export default function App() {
   const [coinsList, setCoinsList] = useState([]);
   const [coinsGraphicList, setCoinsGraphicList] = useState([0]);
-  const [days, setDays] = useState(30);
+  const [days, setDays] = useState(1);
   const [updateData, setUpdateData] = useState(true);
 
-  function updateDay(number: number) {
+  function updateDay(number: any) {
     setDays(number);
     setUpdateData(true);
   }
@@ -84,8 +85,7 @@ export default function App() {
       />
       <CurrentPrice />
       <HistoryGraphic />
-      <QuotationsList />
-      <QuotationsItems />
+      <QuotationsList filterDay={updateDay} listTransactions={coinsList} />
     </SafeAreaView>
   );
 }
