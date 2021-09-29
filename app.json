@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Realtime_Bitcoin",
-    "slug": "Realtime_Bitcoin",
+    "name": "OneBitCoin",
+    "slug": "OneBitCoin",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -5,7 +5,7 @@ import HistoryGraphic from './src/components/HistoryGraphic';
 import QuotationsList from './src/components/QuotationsList';
 import QuotationsItems from './src/components/QuotationsList/QuotationsItems';
 
-function verifyNumber(number) {
+function verifyNumber(number: number) {
   if (number <= 9) {
     return "0" + number
   } else {
@@ -13,18 +13,18 @@ function verifyNumber(number) {
   }
 }
 
-function url(qtDays) {
-  const date = new Date();
+function url(qtDays: number) {
+  const date : any = new Date();
   const listLastDays = qtDays;
 
-  const end_date = `${date.getFullYear}-${verifyNumber(date.getMonth()+1)}-${verifyNumber(date.getDate)}`
+  const end_date = `${date.getFullYear()}-${verifyNumber(date.getMonth()+1)}-${verifyNumber(date.getDate())}`
   date.setDate(date.getDate() - listLastDays);
-  const start_date = `${date.getFullYear}-${verifyNumber(date.getMonth()+1)}-${verifyNumber(date.getDate)}`
+  const start_date = `${date.getFullYear()}-${verifyNumber(date.getMonth()+1)}-${verifyNumber(date.getDate())}`
 
   return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${start_date}&end=${end_date}`;
 }
 
-async function getListCoins(url) {
+async function getListCoins(url: string) {
   let response = await fetch(url);
   let returnApi = await response.json();
   let selectListQuotations = returnApi.bpi;
@@ -39,13 +39,13 @@ async function getListCoins(url) {
   console.log(data);
 }
 
-async function getPriceCoinsGraphic(url) {
+async function getPriceCoinsGraphic(url: string) {
   let responseG = await fetch(url);
   let returnApiG = await responseG.json();
   let selectListQuotationsG = returnApiG.bpi;
 
   const queryCoinsListG = Object.keys(selectListQuotationsG).map((key) => {
-    selectListQuotationsG[key]
+    return selectListQuotationsG[key]
   });
   let dataG = queryCoinsListG;
   console.log(dataG);
@@ -57,17 +57,17 @@ export default function App() {
   const [days, setDays] = useState(30);
   const [updateData, setUpdateData] = useState(true);
 
-  function updateDay(number) {
+  function updateDay(number: number) {
     setDays(number);
     setUpdateData(true);
   }
 
   useEffect(() => {
-    getListCoins(url(days)).then((data) => {
+    getListCoins(url(days)).then((data: any) => {
       setCoinsList(data);
     })
 
-    getPriceCoinsGraphic(url(days)).then((dataG) => {
+    getPriceCoinsGraphic(url(days)).then((dataG: any) => {
       setCoinsGraphicList(dataG);
     })
 
